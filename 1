@@ -1,0 +1,101 @@
+// script.js
+
+// Функция для отображения прогноза погоды на странице
+async function displayWeatherForecast() {
+    const weatherContainer = document.getElementById('weather-container');
+    weatherContainer.innerHTML = ''; // Очистка контейнера перед отображением новых данных
+
+    const latitude = 54.3;
+    const longitude = 48.4;
+    const url = `https://vm.nathoro.ru/weather?lattitude=${latitude}&longitude=${longitude}`;
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`Ошибка сети: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data) || data.length === 0) {
+            throw new Error('Некорректные данные от API');
+        }
+
+        data.forEach((forecast, index) => {
+            const card = document.createElement('div');
+            card.classList.add('weather-card');
+
+            const dateElement = document.createElement('p');
+            dateElement.textContent = `Дата: ${new Date(forecast.date).toLocaleDateString()}`;
+
+            const temperatureElement = document.createElement('p');
+            temperatureElement.textContent = `Температура: ${forecast.temperature}°C`;
+
+            const windDirectionElement = document.createElement('p');
+            windDirectionElement.textContent = `Направление ветра: ${forecast.windDirection}`;
+
+            const windSpeedElement = document.createElement('p');
+            windSpeedElement.textContent = `Скорость ветра: ${forecast.windSpeed} м/с`;
+
+            const humidityElement = document.createElement('p');
+            humidityElement.textContent = `Влажность: ${forecast.humidity}%`;
+
+            card.appendChild(dateElement);
+            card.appendChild(temperatureElement);
+            card.appendChild(windDirectionElement);
+            card.appendChild(windSpeedElement);
+            card.appendChild(humidityElement);
+
+            weatherContainer.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Ошибка при получении прогноза погоды:', error);
+    }
+}
+
+// Запуск функции отображения прогноза погоды при загрузке страницы
+window.onload = displayWeatherForecast;
+
+
+//index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоды</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Прогноз погоды</h1>
+    <div id="weather-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+//styles.css
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.weather-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.weather-card p {
+    margin: 5px 0;
+}
