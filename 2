@@ -1,0 +1,97 @@
+//ЭТО У НАС ФАЙЛ site.js
+
+const form = document.getElementById('processForm');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const dataPhone = formData.get('text');
+    const dataPass = formData.get('password');
+    console.log(dataPhone)
+    if (dataPhone.startsWith('+7') && dataPass.length > 6 && dataPhone.length > 3) {
+        Swal.fire(
+            'Данные норм',
+            'да-да ура ура',
+            'success'
+        );
+    } else {
+        Swal.fire(
+            'Данные вообще не норм',
+            'да-да ура ура',
+            'error'
+        );
+    }
+});
+
+// ЭТО style.css
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: #d3d3d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+	position: fixed;
+	bottom: 50%;
+	left: 35%;
+    margin: 0;
+    width: 350px;
+    height: 150px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+#footer {
+    position: fixed;
+    /* Фиксированное положение */
+    left: 0;
+    bottom: 0;
+    padding: 10px;
+    /* Поля вокруг текста */
+    background: #39b54a;
+    /* Цвет фона */
+    color: #fff;
+    /* Цвет текста */
+    width: 100%;
+}
+
+// ЭТО index.html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <title>Главная</title>
+</head>
+
+<body>
+    <div class="card">
+        <form id="processForm">
+            <input type="tel" name="text">
+            <input type="password" name="password">
+            <button type="submit">Проверить</button>
+        </form>
+    </div>
+    <div id="footer">Это май нэйм</div>
+    <script src="http://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="site.js"></script>
+</body>
+
+</html>
