@@ -1,3 +1,5 @@
+// script.js
+
 // Функция для отображения прогноза погоды на странице
 async function displayWeatherForecast() {
     const weatherContainer = document.getElementById('weather-container');
@@ -54,3 +56,46 @@ async function displayWeatherForecast() {
 
 // Запуск функции отображения прогноза погоды при загрузке страницы
 window.onload = displayWeatherForecast;
+
+
+//index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоды</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Прогноз погоды</h1>
+    <div id="weather-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+//styles.css
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.weather-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.weather-card p {
+    margin: 5px 0;
+}
